@@ -37,7 +37,6 @@ function checkMyStats(data) {
 	if( !name ) {
 		let seenName = senses.readMyName(data);
 		name = seenName ? seenName : null;
-		console.log(`&&& MY NAME IS ${name}!`);
 	}
 }
 
