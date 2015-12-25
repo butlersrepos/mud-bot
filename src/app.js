@@ -3,4 +3,4 @@ import * as hud from './mud-hud';
 
 hud.init();
 
-startup();
+//startup();

@@ -20,8 +20,10 @@ export function init() {
 	process.stdin.setEncoding('utf8');
 	process.stdin.on('data', appendToTelnetPane);
 
+	let i = 0;
 	setInterval(() => {
-		screen.render()
+		appendToTelnetPane("New Line incoming! " + ++i);
+		screen.render();
 	}, 100);
 }
 
