@@ -66,7 +66,7 @@ export function isFighting(data, name) {
 	return fightRegex.test(data);
 }
 
-let killedRegex = /You killed (.+)\.\n/;
+let killedRegex = /You killed (.+)\./;
 export function justKilledSomeone(data) {
 	return killedRegex.test(data);
 }
