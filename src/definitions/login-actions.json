@@ -1,0 +1,22 @@
+[
+	{
+		"eventName": "Entering username.",
+		"cues"     : ["Account Name"],
+		"command"  : ""
+	},
+	{
+		"eventName": "Entering password.",
+		"cues"     : ["Account Password:"],
+		"command"  : ""
+	},
+	{
+		"eventName": "Selecting character.",
+		"cues"     : ["Select (or '? for help')"],
+		"command"  : ""
+	},
+	{
+		"eventName": "Throwing out link-dead copy.",
+		"cues"     : ["Throw the other copy out?"],
+		"command"  : "y"
+	}
+]
