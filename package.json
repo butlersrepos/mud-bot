@@ -6,15 +6,16 @@
   "description": "",
   "main": "build/mud-bot.js",
   "scripts": {
-    "test": "npm run build-js && mocha --compilers js:babel-core/register test/*",
+    "test": "npm run build-js && mocha --compilers js:babel-core/register",
     "build-js": "babel src --out-dir build --plugins babel-plugin-rewire",
     "copy-json": "gulp copy:json",
     "prebuild": "gulp clean",
     "build": "npm run copy-json && npm run build-js",
-    "start": "npm run build && node build/bot-startup.js"
+    "start": "npm run build && node build/app.js"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.1.18",
+    "blessed": "^0.1.81",
     "bluebird": "^3.0.6",
     "colors": "^1.1.2",
     "del": "^2.1.0",

@@ -40,6 +40,17 @@ function checkMyStats(data) {
 	}
 }
 
+export function giveMeATarget() {
+	if( !lastSeenEnemies ) return null;
+	let difficultyOrder = ['v', '=', '^'];
+
+	lastSeenEnemies.sort((a, b) => {
+		return difficultyOrder.indexOf(a.difficulty) - difficultyOrder.indexOf(b.difficulty);
+	});
+
+	return lastSeenEnemies[0];
+}
+
 function checkMySurroundings(data) {
 	let enemies = senses.readEnemies(data);
 	lastSeenEnemies = enemies ? enemies : lastSeenEnemies;
