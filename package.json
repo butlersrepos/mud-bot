@@ -6,7 +6,7 @@
   "description": "",
   "main": "build/mud-bot.js",
   "scripts": {
-    "test": "npm run build-js && mocha --compilers js:babel-core/register test/*",
+    "test": "npm run build-js && mocha --compilers js:babel-core/register",
     "build-js": "babel src --out-dir build --plugins babel-plugin-rewire",
     "copy-json": "gulp copy:json",
     "prebuild": "gulp clean",

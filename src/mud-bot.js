@@ -1,11 +1,11 @@
 import * as memory from './memory-organ';
 import * as hud from './mud-hud';
-import murder from './murder-organ';
 import colors from 'colors';
 
 let lookTimer = 1000;
+let fightingFormHealth = 0.9;
 let socket;
-let log = (message)=> {
+let botLog = (message)=> {
 	hud.appendToBotPane("@===BOT===@ ".rainbow + message);
 };
 
@@ -19,13 +19,29 @@ export default function begin(newSocket) {
 	findOutAboutSelf();
 };
 
+function fightNinja() {
+	botLog("murder time!");
+	let target = memory.giveMeATarget();
+	if( target === null ) {
+		return;
+	}
+
+	botLog("Murdering...");
+	socket.write(`kill ${target}\r`);
+}
+
 function liveYoLifeNinja(data) {
 	hud.appendToTelnetPane(data);
 
-	if( memory.health() > 0.9 && !memory.isFighting() ) {
-		log("murder time!");
-		murder(socket);
+	if( readyToFight() ) {
+		fightNinja();
 	}
+}
+
+function readyToFight() {
+	if( memory.health() < fightingFormHealth ) return false;
+	if( memory.isFighting() ) return false;
+	return true;
 }
 
 function findOutAboutSelf() {

@@ -1,14 +1,17 @@
 import blessed from 'blessed';
 
-let screen = blessed.screen({
-	smartCSR: true,
-	useBCE  : true
-});
-
-export let telnetRawOutputPane = createTelnetPane();
-export let botOutputPane = createBotPane();
+export let telnetRawOutputPane = null;
+export let botOutputPane = null;
 
 export function init() {
+	let screen = blessed.screen({
+		smartCSR: true,
+		useBCE  : true
+	});
+
+	telnetRawOutputPane = createTelnetPane();
+	botOutputPane = createBotPane();
+
 	screen.title = `Welcome to Mud Bot`;
 	screen.key(['escape', 'C-c'], function(ch, key) {
 		return process.exit(0);
@@ -20,9 +23,7 @@ export function init() {
 	process.stdin.setEncoding('utf8');
 	process.stdin.on('data', appendToTelnetPane);
 
-	let i = 0;
 	setInterval(() => {
-		appendToTelnetPane("New Line incoming! " + ++i);
 		screen.render();
 	}, 100);
 }
