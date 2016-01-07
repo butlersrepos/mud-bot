@@ -39,6 +39,7 @@ export function appendToTelnetPane(msg) {
 
 export function appendToBotPane(msg) {
 	botOutputPane.pushLine(msg);
+	botOutputPane.scrollTo(botOutputPane.getScrollHeight());
 }
 
 function createBotPane() {
@@ -58,9 +59,6 @@ function createBotPane() {
 			bg    : 'red',
 			border: {
 				fg: '#f0f0f0'
-			},
-			hover : {
-				bg: 'green'
 			}
 		}
 	});
@@ -83,9 +81,6 @@ function createTelnetPane() {
 			bg    : 'blue',
 			border: {
 				fg: '#f0f0f0'
-			},
-			hover : {
-				bg: 'green'
 			}
 		}
 	});

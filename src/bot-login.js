@@ -31,7 +31,7 @@ function startConnection() {
 		var telnetInput = new TelnetInput();
 		var telnetOutput = new TelnetOutput();
 
-		socket.setEncoding("utf8").on("data", parser);
+		socket.setEncoding("utf8").pipe(telnetInput).on("data", parser);
 		process.stdin.pipe(telnetOutput).pipe(socket);
 	});
 }

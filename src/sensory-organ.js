@@ -1,17 +1,25 @@
+import * as hud from './mud-hud';
 /**
  * I am the low level distiller of information from the Telnets.
  */
-let enemyRegex = /\[(.)\]\s(.+)\n/g;
+let enemyRegex = /\[(.)\]\s(.+)(\r|\n)/g;
 export function readEnemies(data) {
 	let extrapolate;
 	let enemyData = [];
 
-	while( (extrapolate = enemyRegex.exec(data)) != null ) {
+	hud.appendToBotPane(`data is ${data}`);
+	extrapolate = enemyRegex.exec(data);
+	hud.appendToBotPane(`extrap is ${extrapolate}`);
+
+	while( extrapolate != null ) {
+		hud.appendToBotPane(`extrapolated ${extrapolate}`);
+		extrapolate[2] = extrapolate[2].replace('[0m', '');
 		let enemy = {
 			difficulty: extrapolate[1],
 			name      : extrapolate[2]
 		};
 		enemyData.push(enemy);
+		extrapolate = enemyRegex.exec(data);
 	}
 
 	return enemyData;

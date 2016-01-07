@@ -19,7 +19,7 @@ describe('Mud Bot', () => {
 
 	describe('#fightNinja', function() {
 		it('should send a kill command if there was an enemy', function() {
-			memorySpy.giveMeATarget = () => 'worker';
+			memorySpy.giveMeATarget = () => ({name: 'worker'});
 
 			underTest.__get__('fightNinja')();
 

@@ -1,6 +1,8 @@
 import rewire from 'rewire';
-import {expect,should} from 'chai';
+import {expect,default as chai} from 'chai';
+import spies from 'chai-spies';
 let underTest = rewire('../build/sensory-organ');
+underTest.__Rewire__('hud', chai.spy.object([`appendToTelnetPane`, `appendToBotPane`]));
 
 describe('Sensory Organ', () => {
 	let exampleData = 'HP: 1/2 SP: 3/4 EXP: 567 DAM: 89';

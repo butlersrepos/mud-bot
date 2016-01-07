@@ -1,6 +1,10 @@
-import {expect, should} from 'chai';
+import {expect, default as chai} from 'chai';
 import rewire from 'rewire';
+import spies from 'chai-spies';
+chai.use(spies);
+
 let underTest = rewire('../build/memory-organ');
+underTest.__Rewire__('hud', chai.spy.object([`appendToTelnetPane`, `appendToBotPane`]));
 
 describe(`Memory Organ`, () => {
 	describe('#giveMeATarget', function() {

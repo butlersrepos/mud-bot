@@ -20,14 +20,14 @@ export default function begin(newSocket) {
 };
 
 function fightNinja() {
-	botLog("murder time!");
 	let target = memory.giveMeATarget();
-	if( target === null ) {
+
+	if( !target ) {
 		return;
 	}
 
-	botLog("Murdering...");
-	socket.write(`kill ${target}\r`);
+	botLog(`Trying to murder a ${target.name}`);
+	socket.write(`kill ${target.name}\r`);
 }
 
 function liveYoLifeNinja(data) {
@@ -39,8 +39,12 @@ function liveYoLifeNinja(data) {
 }
 
 function readyToFight() {
-	if( memory.health() < fightingFormHealth ) return false;
-	if( memory.isFighting() ) return false;
+	if( memory.health() < fightingFormHealth ) {
+		return false;
+	}
+	if( memory.isFighting() ) {
+		return false;
+	}
 	return true;
 }
 
