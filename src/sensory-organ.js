@@ -11,7 +11,7 @@ export function readEnemies(data) {
 	extrapolate = enemyRegex.exec(data);
 	hud.appendToBotPane(`extrap is ${extrapolate}`);
 
-	while( extrapolate != null ) {
+	while (extrapolate != null) {
 		hud.appendToBotPane(`extrapolated ${extrapolate}`);
 		extrapolate[2] = extrapolate[2].replace('[0m', '');
 		let enemy = {
@@ -27,27 +27,27 @@ export function readEnemies(data) {
 
 let hpRegex = /HP: (\d+)\/(\d+)/g;
 export function readHP(data) {
-	if( data.match(hpRegex) ) {
+	if (data.match(hpRegex)) {
 		let extrapolate = hpRegex.exec(data);
 		let currentHitPoints = parseInt(extrapolate[1]);
 		let maximumHitPoints = parseInt(extrapolate[2]);
-		return {currentHitPoints, maximumHitPoints};
+		return { currentHitPoints, maximumHitPoints };
 	}
 }
 
 let spRegex = /SP: (\d+)\/(\d+)/g;
 export function readSP(data) {
-	if( data.match(spRegex) ) {
+	if (data.match(spRegex)) {
 		let extrapolate = spRegex.exec(data);
 		let currentSpecialPoints = parseInt(extrapolate[1]);
 		let maxSpecialPoints = parseInt(extrapolate[2]);
-		return {currentSpecialPoints, maxSpecialPoints};
+		return { currentSpecialPoints, maxSpecialPoints };
 	}
 }
 
 let expRegex = /EXP: (\d+)/g;
 export function readExp(data) {
-	if( data.match(expRegex) ) {
+	if (data.match(expRegex)) {
 		let extrapolate = expRegex.exec(data);
 		return parseInt(extrapolate[1]);
 	}
@@ -55,7 +55,7 @@ export function readExp(data) {
 
 let damageRegex = /DAM: (\d+)/g;
 export function readDamage(data) {
-	if( data.match(damageRegex) ) {
+	if (data.match(damageRegex)) {
 		let extrapolate = damageRegex.exec(data);
 		return parseInt(extrapolate[1]);
 	}
@@ -63,7 +63,7 @@ export function readDamage(data) {
 
 let nameRegex = /Statistics for (\w+)/;
 export function readMyName(data) {
-	if( data.match(nameRegex) ) {
+	if (data.match(nameRegex)) {
 		let extrapolate = nameRegex.exec(data);
 		return extrapolate[1];
 	}

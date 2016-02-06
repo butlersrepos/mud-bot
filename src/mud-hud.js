@@ -13,7 +13,7 @@ export function init() {
 	botOutputPane = createBotPane();
 
 	screen.title = `Welcome to Mud Bot`;
-	screen.key(['escape', 'C-c'], function(ch, key) {
+	screen.key(['escape', 'C-c'], function (ch, key) {
 		return process.exit(0);
 	});
 
@@ -30,7 +30,7 @@ export function init() {
 
 export function appendToTelnetPane(msg) {
 	telnetRawOutputPane.content += msg;
-	if( telnetRawOutputPane.getLines() > 8 ) {
+	if (telnetRawOutputPane.getLines() > 8) {
 		console.log("deleting one");
 		telnetRawOutputPane.deleteLine(0);
 	}

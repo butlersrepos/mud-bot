@@ -14,12 +14,12 @@ export default function credentials({accountName, accountPass, characterSlot} = 
 	setLoginAction("Entering password.", accountPass);
 	setLoginAction("Selecting character.", characterSlot);
 
-	return {startConnection};
+	return { startConnection };
 };
 
 function setLoginAction(eventName, value) {
 	loginActions.forEach((action) => {
-		if( action.eventName == eventName ) {
+		if (action.eventName == eventName) {
 			action.command = value;
 		}
 	})
@@ -27,7 +27,7 @@ function setLoginAction(eventName, value) {
 
 function startConnection() {
 	hud.appendToBotPane("Connecting to Tsunami MUD");
-	socket = net.createConnection(23, 'tsunami.thebigwave.net', function() {
+	socket = net.createConnection(23, 'tsunami.thebigwave.net', function () {
 		var telnetInput = new TelnetInput();
 		var telnetOutput = new TelnetOutput();
 
@@ -39,7 +39,7 @@ function startConnection() {
 function parser(data) {
 	hud.appendToTelnetPane(data);
 
-	if( startPlaying.test(data) || reconnecting.test(data) ) {
+	if (startPlaying.test(data) || reconnecting.test(data)) {
 		socket.removeListener('data', parser);
 		botBegin(socket);
 	}
@@ -48,12 +48,12 @@ function parser(data) {
 }
 
 function checkLoginActions(data) {
-	loginActions.forEach(function(action) {
+	loginActions.forEach(function (action) {
 		let foundCues = action.cues.filter((cue) => {
 			return data.indexOf(cue) != -1;
 		});
 
-		if( foundCues.length > 0 ) {
+		if (foundCues.length > 0) {
 			hud.appendToBotPane("@===BOT===@ ".rainbow + action.eventName);
 			socket.write(action.command + '\r');
 		}

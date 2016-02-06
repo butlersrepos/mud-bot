@@ -13,6 +13,7 @@ let lastSeenEnemies;
 let currentState = {
 	fighting: false
 };
+
 let reportStatus = () => {
 	console.log(`STATUS! HEALTH: ${currentHitPoints}/${maximumHitPoints} - SPECIAL: ${currentSpecialPoints}/${maxSpecialPoints}`);
 };
@@ -25,10 +26,10 @@ export function observe(data) {
 
 function checkMyStats(data) {
 	let hp = senses.readHP(data);
-	({currentHitPoints, maximumHitPoints} = hp ? hp : {currentHitPoints, maximumHitPoints});
+	({ currentHitPoints, maximumHitPoints } = hp ? hp : { currentHitPoints, maximumHitPoints });
 
 	let sp = senses.readSP(data);
-	({currentSpecialPoints, maximumSpecialPoints} = sp ? sp : {currentSpecialPoints, maximumSpecialPoints});
+	({ currentSpecialPoints, maximumSpecialPoints } = sp ? sp : { currentSpecialPoints, maximumSpecialPoints });
 
 	let exp = senses.readExp(data);
 	experiencePoints = exp ? exp : experiencePoints;
@@ -36,14 +37,14 @@ function checkMyStats(data) {
 	let dmg = senses.readDamage(data);
 	damage = dmg ? dmg : damage;
 
-	if( !name ) {
+	if (!name) {
 		let seenName = senses.readMyName(data);
 		name = seenName ? seenName : null;
 	}
 }
 
 export function giveMeATarget() {
-	if( !lastSeenEnemies ) {
+	if (!lastSeenEnemies) {
 		hud.appendToBotPane("Never seen any enemies.");
 		return null;
 	}

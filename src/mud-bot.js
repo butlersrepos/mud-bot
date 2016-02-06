@@ -22,7 +22,7 @@ export default function begin(newSocket) {
 function fightNinja() {
 	let target = memory.giveMeATarget();
 
-	if( !target ) {
+	if (!target) {
 		return;
 	}
 
@@ -33,16 +33,16 @@ function fightNinja() {
 function liveYoLifeNinja(data) {
 	hud.appendToTelnetPane(data);
 
-	if( readyToFight() ) {
+	if (readyToFight()) {
 		fightNinja();
 	}
 }
 
 function readyToFight() {
-	if( memory.health() < fightingFormHealth ) {
+	if (memory.health() < fightingFormHealth) {
 		return false;
 	}
-	if( memory.isFighting() ) {
+	if (memory.isFighting()) {
 		return false;
 	}
 	return true;

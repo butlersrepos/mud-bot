@@ -7,8 +7,8 @@ let underTest = rewire('../build/memory-organ');
 underTest.__Rewire__('hud', chai.spy.object([`appendToTelnetPane`, `appendToBotPane`]));
 
 describe(`Memory Organ`, () => {
-	describe('#giveMeATarget', function() {
-		it('should return null if memory has no enemies', function() {
+	describe('#giveMeATarget', function () {
+		it('should return null if memory has no enemies', function () {
 			underTest.__set__('lastSeenEnemies', null);
 
 			let result = underTest.giveMeATarget();
@@ -16,13 +16,13 @@ describe(`Memory Organ`, () => {
 			expect(result).to.be.null;
 		});
 
-		it('should return the lowest level enemy when there are multiple', function() {
+		it('should return the lowest level enemy when there are multiple', function () {
 			let weakEnemy = {
-				name: 'weak',
+				name      : 'weak',
 				difficulty: 'v'
 			};
 			let strongEnemy = {
-				name: 'strong',
+				name      : 'strong',
 				difficulty: '='
 			};
 

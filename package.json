@@ -6,6 +6,7 @@
   "description": "",
   "main": "build/mud-bot.js",
   "scripts": {
+	"check-style":"jscs --es-next --preset=crockford src/",
     "test": "npm run build-js && mocha --compilers js:babel-core/register",
     "build-js": "babel src --out-dir build --plugins babel-plugin-rewire",
     "copy-json": "gulp copy:json",
