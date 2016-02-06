@@ -1,7 +1,7 @@
 import blessed from 'blessed';
 
-export let telnetRawOutputPane = null;
-export let botOutputPane = null;
+export let telnetRawOutputPanel = null;
+export let botOutputPanel = null;
 
 export function init() {
 	let screen = blessed.screen({
@@ -9,47 +9,65 @@ export function init() {
 		useBCE  : true
 	});
 
-	telnetRawOutputPane = createTelnetPane();
-	botOutputPane = createBotPane();
+	telnetRawOutputPanel = createTelnetPanel();
+	botOutputPanel = createBotPanel();
+	let botStatePanel = createBotStatePanel();
 
 	screen.title = `Welcome to Mud Bot`;
 	screen.key(['escape', 'C-c'], function (ch, key) {
 		return process.exit(0);
 	});
 
-	screen.append(telnetRawOutputPane);
-	screen.append(botOutputPane);
+	screen.append(telnetRawOutputPanel);
+	screen.append(botOutputPanel);
+	screen.append(botStatePanel);
 
 	process.stdin.setEncoding('utf8');
-	process.stdin.on('data', appendToTelnetPane);
+	process.stdin.on('data', appendToTelnetPanel);
 
 	setInterval(() => {
 		screen.render();
 	}, 100);
 }
 
-export function appendToTelnetPane(msg) {
-	telnetRawOutputPane.content += msg;
-	if (telnetRawOutputPane.getLines() > 8) {
+export function appendToTelnetPanel(msg) {
+	telnetRawOutputPanel.content += msg;
+	if (telnetRawOutputPanel.getLines() > 8) {
 		console.log("deleting one");
-		telnetRawOutputPane.deleteLine(0);
+		telnetRawOutputPanel.deleteLine(0);
 	}
-	telnetRawOutputPane.scrollTo(telnetRawOutputPane.getScrollHeight());
+	telnetRawOutputPanel.scrollTo(telnetRawOutputPanel.getScrollHeight());
 }
 
-export function appendToBotPane(msg) {
-	botOutputPane.pushLine(msg);
-	botOutputPane.scrollTo(botOutputPane.getScrollHeight());
+export function appendToBotPanel(msg) {
+	botOutputPanel.pushLine(msg);
+	botOutputPanel.scrollTo(botOutputPanel.getScrollHeight());
 }
 
-function createBotPane() {
+function createBotStatePanel() {
+	return blessed.box({
+		top   : '50%',
+		left  : '50%',
+		width : '50%',
+		height: '50%',
+		style : {
+			fg    : 'white',
+			bg    : 'green',
+			border: {
+				fg: '#f0f0f0'
+			}
+		}
+	});
+}
+
+function createBotPanel() {
 	return blessed.box({
 		scrollable  : true,
 		alwaysScroll: true,
 		top         : '0',
 		left        : '50%',
 		width       : '50%',
-		height      : '100%',
+		height      : '50%',
 		tags        : true,
 		border      : {
 			type: 'bg'
@@ -64,7 +82,7 @@ function createBotPane() {
 	});
 }
 
-function createTelnetPane() {
+function createTelnetPanel() {
 	return blessed.box({
 		scrollable  : true,
 		alwaysScroll: true,

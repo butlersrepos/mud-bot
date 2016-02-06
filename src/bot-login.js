@@ -26,7 +26,7 @@ function setLoginAction(eventName, value) {
 }
 
 function startConnection() {
-	hud.appendToBotPane("Connecting to Tsunami MUD");
+	hud.appendToBotPanel("Connecting to Tsunami MUD");
 	socket = net.createConnection(23, 'tsunami.thebigwave.net', function () {
 		var telnetInput = new TelnetInput();
 		var telnetOutput = new TelnetOutput();
@@ -37,7 +37,7 @@ function startConnection() {
 }
 
 function parser(data) {
-	hud.appendToTelnetPane(data);
+	hud.appendToTelnetPanel(data);
 
 	if (startPlaying.test(data) || reconnecting.test(data)) {
 		socket.removeListener('data', parser);
@@ -54,7 +54,7 @@ function checkLoginActions(data) {
 		});
 
 		if (foundCues.length > 0) {
-			hud.appendToBotPane("@===BOT===@ ".rainbow + action.eventName);
+			hud.appendToBotPanel("@===BOT===@ ".rainbow + action.eventName);
 			socket.write(action.command + '\r');
 		}
 	});

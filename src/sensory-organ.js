@@ -7,12 +7,12 @@ export function readEnemies(data) {
 	let extrapolate;
 	let enemyData = [];
 
-	hud.appendToBotPane(`data is ${data}`);
+	hud.appendToBotPanel(`data is ${data}`);
 	extrapolate = enemyRegex.exec(data);
-	hud.appendToBotPane(`extrap is ${extrapolate}`);
+	hud.appendToBotPanel(`extrap is ${extrapolate}`);
 
 	while (extrapolate != null) {
-		hud.appendToBotPane(`extrapolated ${extrapolate}`);
+		hud.appendToBotPanel(`extrapolated ${extrapolate}`);
 		extrapolate[2] = extrapolate[2].replace('[0m', '');
 		let enemy = {
 			difficulty: extrapolate[1],

@@ -45,24 +45,24 @@ function checkMyStats(data) {
 
 export function giveMeATarget() {
 	if (!lastSeenEnemies) {
-		hud.appendToBotPane("Never seen any enemies.");
+		hud.appendToBotPanel("Never seen any enemies.");
 		return null;
 	}
 	let difficultyOrder = ['v', '=', '^'];
 
-	hud.appendToBotPane(`Presorted enemies is ${lastSeenEnemies}`);
+	hud.appendToBotPanel(`Presorted enemies is ${lastSeenEnemies}`);
 	lastSeenEnemies.sort((a, b) => {
 		return difficultyOrder.indexOf(a.difficulty) - difficultyOrder.indexOf(b.difficulty);
 	});
 
-	hud.appendToBotPane(`Sorted enemies is ${lastSeenEnemies}`);
-	hud.appendToBotPane(`Target will be ${JSON.stringify(lastSeenEnemies[0])}`);
+	hud.appendToBotPanel(`Sorted enemies is ${lastSeenEnemies}`);
+	hud.appendToBotPanel(`Target will be ${JSON.stringify(lastSeenEnemies[0])}`);
 	return lastSeenEnemies[0];
 }
 
 function checkMySurroundings(data) {
 	let enemies = senses.readEnemies(data);
-	hud.appendToBotPane(`Sensed enemies is ${enemies}`);
+	hud.appendToBotPanel(`Sensed enemies is ${enemies}`);
 	lastSeenEnemies = enemies ? enemies : lastSeenEnemies;
 
 	let justFinishedFight = senses.justKilledSomeone(data);

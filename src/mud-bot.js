@@ -6,7 +6,7 @@ let lookTimer = 1000;
 let fightingFormHealth = 0.9;
 let socket;
 let botLog = (message)=> {
-	hud.appendToBotPane("@===BOT===@ ".rainbow + message);
+	hud.appendToBotPanel("@===BOT===@ ".rainbow + message);
 };
 
 export default function begin(newSocket) {
@@ -31,7 +31,7 @@ function fightNinja() {
 }
 
 function liveYoLifeNinja(data) {
-	hud.appendToTelnetPane(data);
+	hud.appendToTelnetPanel(data);
 
 	if (readyToFight()) {
 		fightNinja();

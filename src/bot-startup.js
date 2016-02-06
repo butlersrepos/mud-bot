@@ -37,7 +37,7 @@ function getCharacterSlot() {
 export default function startup() {
 	let telnetStream = new stream.Writable({
 		write: function (chunk, encoding, next) {
-			hud.appendToTelnetPane(chunk);
+			hud.appendToTelnetPanel(chunk);
 			next();
 		}
 	});
